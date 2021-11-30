@@ -42,6 +42,7 @@ func (db stulist) server_show_insert(w http.ResponseWriter, req *http.Request) {
 	req.ParseForm()
 	stu := reqfromToStu(req)
 	db = db.insert(stu)
+	writeFile(db, "student set.json")
 	fmt.Println("after insert")
 	for _, stu := range db {
 		fmt.Println(stu.stutostr())
