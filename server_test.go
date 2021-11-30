@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 	"testing"
 )
 
@@ -17,8 +18,18 @@ func TestShowOrder(t *testing.T){
 	fetch("http://localhost:8000/order")
 }
 
+func TestRemoteInsert(t *testing.T){
+	var stu student
+	fmt.Scanln(&(stu.Id),&(stu.Name),&(stu.Gender),&(stu.MarkMath),&(stu.MarkEnglish))
+	err := writepost("http://localhost:8000/insert",stu)
+	if err != nil{
+		t.Error("wrong happen in writePost of insert test")
+	}
+}
+
 func fetch(url string){
 	resp, err := http.Get(url)
+
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
 		os.Exit(1)
@@ -30,4 +41,33 @@ func fetch(url string){
 		os.Exit(1)
 	}
 	fmt.Printf("%s", b)
+}
+
+func generateUrlMap(stu student) (map[string][]string){
+	stuMap := make(map[string][]string)
+	stuMap["Id"] = []string{1:stu.Id}
+	stuMap["Id"] = []string{1:stu.Name}
+	stuMap["Id"] = []string{1:stu.Gender}
+	stuMap["Id"] = []string{1:strconv.Itoa(stu.MarkMath)}
+	stuMap["Id"] = []string{1:strconv.Itoa(stu.MarkEnglish)}
+	return stuMap
+}
+
+func writepost(url string, stu student) (error){
+
+	stumap := generateUrlMap(stu)
+	resp, err := http.PostForm(url,stumap)
+	if err != nil{
+		fmt.Println("err in witepost")
+		return err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil{
+		fmt.Println("err in witepost")
+		return err
+	}
+	fmt.Println(body)
+
+	return nil
 }

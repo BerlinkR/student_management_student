@@ -17,28 +17,34 @@ func main(){
 	mux := http.NewServeMux()
 	mux.Handle("/show", http.HandlerFunc(db.server_show_list))
 	mux.Handle("/order", http.HandlerFunc(db.server_show_order))
+	mux.Handle("/insert", http.HandlerFunc(db.server_show_insert))
+
 	log.Fatal(http.ListenAndServe("localhost:8000", mux))
 
 }
 
-func (list stulist) server_show_list(w http.ResponseWriter, req *http.Request) {
-	for _, stu := range list {
+func (db stulist) server_show_list(w http.ResponseWriter, req *http.Request) {
+	for _, stu := range db {
 		fmt.Fprintf(w, "%s\n", stu.stutostr())
 	}
 }
 
-func (list stulist) server_show_order(w http.ResponseWriter, req *http.Request) {
-	list = list.order()
-	for _, stu := range list {
+func (db stulist) server_show_order(w http.ResponseWriter, req *http.Request) {
+	db = db.order()
+	fmt.Fprintf(w,"after order:")
+	for _, stu := range db {
 		fmt.Fprintf(w, "%s\n", stu.stutostr())
 	}
 }
 
-func (list stulist) server_show_insert(w http.ResponseWriter, req *http.Request) {
-	list = list.order()
-	for _, stu := range list {
-		fmt.Fprintf(w, "%s\n", stu.stutostr())
-	}
+func (db stulist) server_show_insert(w http.ResponseWriter, req *http.Request) {
+	fmt.Println(req)
+
+	//db.insert(stu)
+	//fmt.Fprintf(w, "after insert")
+	//for _, stu := range db {
+	//	fmt.Fprintf(w, "%s\n", stu.stutostr())
+	//}
 }
 
 func (stu student) stutostr() (string){
