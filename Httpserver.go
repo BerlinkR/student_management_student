@@ -35,7 +35,7 @@ func (db stulist) server_show_order(w http.ResponseWriter, req *http.Request) {
 
 func (stu student) stutostr() (string){
 	var s string
-	s = stu.Id + " " + stu.Name + " " + stu.Gender + " " + string(stu.MarkMath) + " " + string(stu.MarkEnglish)
+	s = stu.Id + " " + stu.Name + " " + stu.Gender + " " + fmt.Sprint(stu.MarkMath) + " " + fmt.Sprint(stu.MarkEnglish)
 	return s
 }
 
