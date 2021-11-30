@@ -21,15 +21,15 @@ func main(){
 
 }
 
-func (db stulist) server_show_list(w http.ResponseWriter, req *http.Request) {
-	for _, stu := range db {
+func (list stulist) server_show_list(w http.ResponseWriter, req *http.Request) {
+	for _, stu := range list {
 		fmt.Fprintf(w, "%s\n", stu.stutostr())
 	}
 }
 
-func (db stulist) server_show_order(w http.ResponseWriter, req *http.Request) {
-	db = db.order()
-	for _, stu := range db {
+func (list stulist) server_show_order(w http.ResponseWriter, req *http.Request) {
+	list = list.order()
+	for _, stu := range list {
 		fmt.Fprintf(w, "%s\n", stu.stutostr())
 	}
 }
