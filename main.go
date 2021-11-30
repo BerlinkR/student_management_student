@@ -15,7 +15,7 @@ func main(){
 	}
 	mux := http.NewServeMux()
 	mux.Handle("/show", http.HandlerFunc(db.server_show_list))
-	mux.Handle("/order", http.HandlerFunc(db.price))
+	mux.Handle("/order", http.HandlerFunc(db.server_show_order))
 	log.Fatal(http.ListenAndServe("localhost:8000", mux))
 
 }
