@@ -22,14 +22,14 @@ func main(){
 
 func (db stulist) server_show_list(w http.ResponseWriter, req *http.Request) {
 	for index, stu := range db {
-		fmt.Fprintf(w, "%s: %s\n", index, stu)
+		fmt.Fprintf(w, "%d: %v\n", index, stu)
 	}
 }
 
 func (db stulist) server_show_order(w http.ResponseWriter, req *http.Request) {
 	db = db.order()
 	for index, stu := range db {
-		fmt.Fprintf(w, "%s: %s\n", index, stu)
+		fmt.Fprintf(w, "%d: %v\n", index, stu)
 	}
 }
 

@@ -44,7 +44,7 @@ func readFile(filename string) (stulist, error){
 
 	filePtr, err := os.Open(filename)
 	if err != nil {
-		fmt.Println("Open file failed [Err:%s]", err.Error())
+		fmt.Println("Open file failed: ", err.Error())
 		return nil, err
 	}
 	defer filePtr.Close()
