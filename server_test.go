@@ -10,10 +10,10 @@ import (
 
 //If you want to write a test function:
 //You must write "Test" at the prefix and then the next word must use big cap as first character
-func TestShowlist(t *testing.T){
+func TestShowList(t *testing.T){
 	fetch("http://localhost:8000/show")
 }
-func TestShoworder(t *testing.T){
+func TestShowOrder(t *testing.T){
 	fetch("http://localhost:8000/order")
 }
 

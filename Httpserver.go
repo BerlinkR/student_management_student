@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 func main(){
@@ -35,7 +36,7 @@ func (db stulist) server_show_order(w http.ResponseWriter, req *http.Request) {
 
 func (stu student) stutostr() (string){
 	var s string
-	s = stu.Id + " " + stu.Name + " " + stu.Gender + " " + fmt.Sprint(stu.MarkMath) + " " + fmt.Sprint(stu.MarkEnglish)
+	s = stu.Id + " " + stu.Name + " " + stu.Gender + " " + strconv.Itoa(stu.MarkMath) + " " + strconv.Itoa(stu.MarkEnglish)
 	return s
 }
 
