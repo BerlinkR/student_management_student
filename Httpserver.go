@@ -21,16 +21,22 @@ func main(){
 }
 
 func (db stulist) server_show_list(w http.ResponseWriter, req *http.Request) {
-	for index, stu := range db {
-		fmt.Fprintf(w, "%d: %v\n", index, stu)
+	for _, stu := range db {
+		fmt.Fprintf(w, "%s\n", stu.stutostr())
 	}
 }
 
 func (db stulist) server_show_order(w http.ResponseWriter, req *http.Request) {
 	db = db.order()
-	for index, stu := range db {
-		fmt.Fprintf(w, "%d: %v\n", index, stu)
+	for _, stu := range db {
+		fmt.Fprintf(w, "%s\n", stu.stutostr())
 	}
+}
+
+func (stu student) stutostr() (string){
+	var s string
+	s = stu.Id + " " + stu.Name + " " + stu.Gender + " " + string(stu.MarkMath) + " " + string(stu.MarkEnglish)
+	return s
 }
 
 

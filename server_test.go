@@ -8,10 +8,12 @@ import (
 	"testing"
 )
 
-func Testshowlist(t *testing.T){
+//If you want to write a test function:
+//You must write "Test" at the prefix and then the next word must use big cap as first character
+func TestShowlist(t *testing.T){
 	fetch("http://localhost:8000/show")
 }
-func Testshoworder(t *testing.T){
+func TestShoworder(t *testing.T){
 	fetch("http://localhost:8000/order")
 }
 
