@@ -15,8 +15,9 @@ type student struct {
 
 type stulist []student
 
-func (list stulist) insert(stu student) {
+func (list stulist) insert(stu student) (stulist){
 	list = append(list, stu)
+	return list
 }
 
 func (list stulist) delete(studentId string) (stulist){

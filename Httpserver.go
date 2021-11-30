@@ -38,21 +38,31 @@ func (db stulist) server_show_order(w http.ResponseWriter, req *http.Request) {
 }
 
 func (db stulist) server_show_insert(w http.ResponseWriter, req *http.Request) {
-	fmt.Println(req)
 
-	//db.insert(stu)
-	//fmt.Fprintf(w, "after insert")
-	//for _, stu := range db {
-	//	fmt.Fprintf(w, "%s\n", stu.stutostr())
-	//}
+	req.ParseForm()
+	stu := reqfromToStu(req)
+	db = db.insert(stu)
+	fmt.Println("after insert")
+	for _, stu := range db {
+		fmt.Println(stu.stutostr())
+	}
+
 }
-
 func (stu student) stutostr() (string){
 	var s string
 	s = stu.Id + " " + stu.Name + " " + stu.Gender + " " + strconv.Itoa(stu.MarkMath) + " " + strconv.Itoa(stu.MarkEnglish)
 	return s
 }
 
+func reqfromToStu(req *http.Request) (student){
+	var stu student
+	stu.Id = req.Form["Id"][1]
+	stu.Name = req.Form["Name"][1]
+	stu.Gender = req.Form["Gender"][1]
+	stu.MarkEnglish,_ = strconv.Atoi(req.Form["MarkEnglish"][1])
+	stu.MarkMath,_ = strconv.Atoi(req.Form["MarkMath"][1])
+	return stu
+}
 
 
 

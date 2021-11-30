@@ -20,7 +20,11 @@ func TestShowOrder(t *testing.T){
 
 func TestRemoteInsert(t *testing.T){
 	var stu student
-	fmt.Scanln(&(stu.Id),&(stu.Name),&(stu.Gender),&(stu.MarkMath),&(stu.MarkEnglish))
+	stu.Id = "2017213119"
+	stu.Name = "He Hanyue"
+	stu.Gender = "Female"
+	stu.MarkMath = 92
+	stu.MarkEnglish = 89
 	err := writepost("http://localhost:8000/insert",stu)
 	if err != nil{
 		t.Error("wrong happen in writePost of insert test")
@@ -46,10 +50,10 @@ func fetch(url string){
 func generateUrlMap(stu student) (map[string][]string){
 	stuMap := make(map[string][]string)
 	stuMap["Id"] = []string{1:stu.Id}
-	stuMap["Id"] = []string{1:stu.Name}
-	stuMap["Id"] = []string{1:stu.Gender}
-	stuMap["Id"] = []string{1:strconv.Itoa(stu.MarkMath)}
-	stuMap["Id"] = []string{1:strconv.Itoa(stu.MarkEnglish)}
+	stuMap["Name"] = []string{1:stu.Name}
+	stuMap["Gender"] = []string{1:stu.Gender}
+	stuMap["MarkMath"] = []string{1:strconv.Itoa(stu.MarkMath)}
+	stuMap["MarkEnglish"] = []string{1:strconv.Itoa(stu.MarkEnglish)}
 	return stuMap
 }
 
