@@ -21,7 +21,7 @@ func (list stulist) insert(stu student) {
 
 func (list stulist) delete(studentId string) (stulist){
 
-	for index, stu := range list{
+	for index, stu := range list {
 		if stu.Id == studentId{
 			copy(list[index:], list[index+1:])
 			return list

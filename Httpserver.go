@@ -34,6 +34,13 @@ func (list stulist) server_show_order(w http.ResponseWriter, req *http.Request) 
 	}
 }
 
+func (list stulist) server_show_insert(w http.ResponseWriter, req *http.Request) {
+	list = list.order()
+	for _, stu := range list {
+		fmt.Fprintf(w, "%s\n", stu.stutostr())
+	}
+}
+
 func (stu student) stutostr() (string){
 	var s string
 	s = stu.Id + " " + stu.Name + " " + stu.Gender + " " + strconv.Itoa(stu.MarkMath) + " " + strconv.Itoa(stu.MarkEnglish)

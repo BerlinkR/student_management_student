@@ -17,7 +17,6 @@ func TestShowOrder(t *testing.T){
 	fetch("http://localhost:8000/order")
 }
 
-
 func fetch(url string){
 	resp, err := http.Get(url)
 	if err != nil {
